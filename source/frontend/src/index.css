@@ -15,14 +15,21 @@ header {
   background: #618264;
 }
 header .container {
-  max-width: 1400px;
   margin: 0 auto;
   padding: 10px 20px;
-  display: flex;
   align-items: center;
   justify-content: space-between;
+  max-width: 95px;
+  height: 55px;
+  display: block;
 }
-header a {
+header div {
   color: #f1f1f1;
   text-decoration: none;
+}
+
+header div img {
+  max-width: 95px;
+  height: 55px;
+  display: block;
 }

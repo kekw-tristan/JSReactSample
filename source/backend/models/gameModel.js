@@ -22,7 +22,10 @@ const gameSchema = new Schema({
     genre: {
         type: String,
         required: true
-    }
+    }//,
+    // imagePath: {
+    //    required: true
+    // }
 }, { timestamps: true })
 
 module.exports = mongoose.model('Game', gameSchema)
