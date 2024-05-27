@@ -27,16 +27,16 @@ const getPost = async (req, res) => {
 
 // create a new post
 const createPost = async (req, res) => {
-    const {postTitle, postText} = req.body
+    const {title, text} = req.body
 
     let emptyFields = []
 
-    if (!postTitle) {
-        emptyFields.push('postTitle')
+    if (!title) {
+        emptyFields.push('title')
     }
 
-    if (!postText) {
-        emptyFields.push('postText')
+    if (!text) {
+        emptyFields.push('text')
     }
 
     if(emptyFields.length > 0) {
@@ -45,7 +45,7 @@ const createPost = async (req, res) => {
 
     // add to the database
     try {
-        const post = await Post.create({ postTitle, postText })
+        const post = await Post.create({ title, text })
         res.status(200).json(post)
     } catch (error) {
         res.status(400).json({ error: error.message })

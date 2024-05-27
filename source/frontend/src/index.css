@@ -3,8 +3,8 @@
 
 /* layout */
 :root {
-  --primary: #1aac83;
-  --error: #e7195a;
+  --primary: #618264;
+  --error: #7d2b25;
 }
 body {
   background: #f1f1f1;
@@ -12,24 +12,99 @@ body {
   font-family: "Poppins", serif;
 }
 header {
-  background: #618264;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
 }
 header .container {
-  margin: 0 auto;
-  padding: 10px 20px;
+  display: flex;
   align-items: center;
-  justify-content: space-between;
-  max-width: 95px;
-  height: 55px;
-  display: block;
+  justify-content: flex-start;
+  max-width: 1200px;
+  width: 100%;
+  margin: 10px;
 }
 header div {
   color: #f1f1f1;
   text-decoration: none;
 }
-
 header div img {
-  max-width: 95px;
-  height: 55px;
+  max-width: 100px;
+  height: auto;
   display: block;
+}
+.pages{
+  max-width: 1400px;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+/* homepage */
+.home {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 100px;
+}
+.post-details {
+  background: #fff;
+  border-radius: 4px;
+  margin: 20px auto;
+  padding: 20px;
+  position: relative;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+}
+.post-details h4 {
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+  color: var(--primary);
+}
+.post-details p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #555;
+}
+.post-details span {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  background: #f1f1f1;
+  padding: 6px;
+  border-radius: 50%;
+  color: #333;
+}
+
+/* new post form */
+label, input {
+  display: block;
+}
+input {
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  border: 2px solid var(--primary);
+  border-radius: 9px;
+  box-sizing: border-box;
+}
+form button {
+  background: var(--primary);
+  border: 0;
+  color: #f1f1f1;
+  padding: 10px;
+  font-family: "Poppins", serif;
+  border-radius: 9px;
+  cursor: pointer;
+}
+div.error {
+  padding: 10px;
+  background: #ffefef;
+  border: 1px solid var(--error);
+  color: var(--error);
+  border-radius: 4px;
+  margin: 20px 0;
+}
+input.error {
+  border: 1px solid var(--error);
 }

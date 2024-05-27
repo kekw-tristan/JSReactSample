@@ -3,11 +3,11 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const postSchema = new Schema({
-    postTitle: {
+    title: {
         type: String,
         required: true
     },
-    postText: {
+    text: {
         type: String,
         required: true
     }
