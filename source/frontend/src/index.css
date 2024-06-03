@@ -40,6 +40,15 @@ header div img {
   margin: 0 auto;
 }
 
+/* navbar */
+nav {
+  background-color: var(--primary);
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  height: 100px;
+}
+
 /* homepage */
 .home {
   display: grid;
@@ -107,4 +116,10 @@ div.error {
 }
 input.error {
   border: 1px solid var(--error);
+}
+
+/* login */
+.user-form {
+  width: 500px;
+  height: 500px;
 }
