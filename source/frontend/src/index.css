@@ -1,5 +1,6 @@
 /* google font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 /* layout */
 :root {
@@ -17,6 +18,7 @@ header {
   align-items: center;
   padding: 10px 20px;
 }
+/*
 header .container {
   display: flex;
   align-items: center;
@@ -33,7 +35,7 @@ header div img {
   max-width: 100px;
   height: auto;
   display: block;
-}
+}*/
 .pages{
   max-width: 1400px;
   padding: 20px;
@@ -47,6 +49,21 @@ nav {
   align-items: center;
   padding: 10px 20px;
   height: 100px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: large;
+  color: #f1f1f1;
+}
+div img {
+  max-width: 100px;
+  height: auto;
+  display: block;
+}
+.container {
+  width: 100px;
+  height: auto;
+  padding: 20px;
+  margin: 10px;
+  text-decoration: none;
 }
 
 /* homepage */

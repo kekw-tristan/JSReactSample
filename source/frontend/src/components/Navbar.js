@@ -1,41 +1,23 @@
-// import { Link } from 'react-router-dom'
-// import myLogo from './logo.png'
-//
-// const Navbar = () => {
-//
-//     return (
-//         <header>
-//             <div className="container">
-//                 <Link to="/">
-//                     <img src={myLogo} alt="Logo" />
-//                 </Link>
-//                 <Link to="./pages/Home"></Link>
-//                 <Link to="./pages/Login"></Link>
-//             </div>
-//         </header>
-//     )
-// }
-//
-// export default Navbar
-
+import { Link } from 'react-router-dom'
+import myLogo from './logo.png'
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
+import {NavbarOffcanvas} from "react-bootstrap";
 
-function TextLinkExample() {
+function Header() {
     return (
         <Navbar className="nav">
             <Container>
-                <Navbar.Brand href="/pages/Home">Home</Navbar.Brand>
-                <Navbar.Toggle />
-                <Navbar.Collapse className="justify-content-end"></Navbar.Collapse>
+                < img src={myLogo} alt="Logo" />
             </Container>
             <Container>
-                <Navbar.Brand href="/pages/Login">Login</Navbar.Brand>
-                <Navbar.Toggle />
-                <Navbar.Collapse className="justify-content-end"></Navbar.Collapse>
+                <Navbar.Brand href="../pages/Home">Home</Navbar.Brand>
+            </Container>
+            <Container>
+                <Navbar.Brand href="../pages/Login">Login</Navbar.Brand>
             </Container>
         </Navbar>
     );
 }
 
-export default TextLinkExample;
+export default Header;
