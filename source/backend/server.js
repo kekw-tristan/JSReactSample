@@ -3,7 +3,7 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const postRoutes = require('./routes/posts')
-const userRoutes = require('./routes/users')
+const userRoutes = require('./routes/user')
 const gameRoutes = require('./routes/games')
 const commentRoutes = require('./routes/comments')
 
@@ -20,7 +20,7 @@ app.use((req, res, next) => {
 
 // routes
 app.use('/api/posts', postRoutes)
-app.use('/api/users', userRoutes)
+app.use('/api/user', userRoutes)
 app.use('/api/games', gameRoutes)
 app.use('/api/comments', commentRoutes)
 
@@ -33,6 +33,6 @@ mongoose.connect(process.env.MONGO_URI)
             console.log('listening for requests on port', process.env.PORT)
         })
     })
-    .catch((err) => {
-        console.log(err)
+    .catch((error) => {
+        console.log(error)
     })

@@ -1,23 +1,40 @@
-import { Link } from 'react-router-dom'
 import myLogo from './logo.png'
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
-import {NavbarOffcanvas} from "react-bootstrap";
+import { Link } from 'react-router-dom'
+import {useLogout} from "../hooks/useLogout"
+import {useAuthContext} from "../hooks/useAuthContext";
 
-function Header() {
+const Navbar = () => {
+    const { logout } = useLogout()
+    const { user } = useAuthContext()
+
+    const handleClick = () => {
+        logout()
+    }
+
     return (
-        <Navbar className="nav">
-            <Container>
-                < img src={myLogo} alt="Logo" />
-            </Container>
-            <Container>
-                <Navbar.Brand href="../pages/Home">Home</Navbar.Brand>
-            </Container>
-            <Container>
-                <Navbar.Brand href="../pages/Login">Login</Navbar.Brand>
-            </Container>
-        </Navbar>
-    );
+        <header>
+            <div className="container">
+                <Link to="/">
+                    < img src={myLogo} alt="Logo" />
+                </Link>
+                <nav>
+                    {user && (
+                        <div>
+                            <span>{user.email}</span>
+                            <button onClick={handleClick}>Log out</button>
+                        </div>
+                    )}
+                    {!user && (
+                        <div>
+                            <Link to="/login">Einloggen</Link>
+                            <Link to="/signup">Registrieren</Link>
+                        </div>
+                    )}
+
+                </nav>
+            </div>
+        </header>
+    )
 }
 
-export default Header;
+export default Navbar

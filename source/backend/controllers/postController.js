@@ -1,9 +1,12 @@
 const Post = require('../models/postModel')
 const mongoose = require('mongoose')
+const {request} = require("express")
 
 // get all posts
 const getPosts = async (req, res) => {
-    const posts = await Post.find({}).sort({createdAt: -1})
+    const user_id = req.user._id
+
+    const posts = await Post.find({user_id}).sort({createdAt: -1})
 
     res.status(200).json(posts)
 }
@@ -45,7 +48,8 @@ const createPost = async (req, res) => {
 
     // add to the database
     try {
-        const post = await Post.create({ title, text })
+        const user_id = req.user._id
+        const post = await Post.create({ title, text, user_id })
         res.status(200).json(post)
     } catch (error) {
         res.status(400).json({ error: error.message })

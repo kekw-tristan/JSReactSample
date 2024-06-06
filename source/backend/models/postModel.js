@@ -10,6 +10,10 @@ const postSchema = new Schema({
     text: {
         type: String,
         required: true
+    },
+    user_id: {
+        type: Number,
+        required: true
     }
 }, { timestamps: true })
 
