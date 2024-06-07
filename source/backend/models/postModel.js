@@ -12,7 +12,7 @@ const postSchema = new Schema({
         required: true
     },
     user_id: {
-        type: Number,
+        type: String,
         required: true
     }
 }, { timestamps: true })
