@@ -1,6 +1,5 @@
 const Post = require('../models/postModel')
 const mongoose = require('mongoose')
-const {request} = require("express")
 
 // get all posts
 const getPosts = async (req, res) => {

@@ -6,6 +6,31 @@ const createToken = (_id) => {
     return jwt.sign({_id}, process.env.SECRET, { expiresIn: '3d' })
 }
 
+// get all users
+const getUsers = async (req, res) => {
+
+    const users = await User.find({}).sort({createdAt: -1})
+
+    res.status(200).json(users)
+}
+
+// get a single user
+const getUser = async (req, res) => {
+    const { id } = req.params
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'No such User'})
+    }
+
+    const user = await User.findById(id)
+
+    if (!user) {
+        return res.status(404).json({error: 'No such User'})
+    }
+
+    res.status(200).json(user)
+}
+
 // login a user
 const loginUser = async (req, res) => {
     const {username, email, password} = req.body
@@ -38,4 +63,4 @@ const signupUser = async (req, res) => {
     }
 }
 
-module.exports = { signupUser, loginUser }
+module.exports = { getUsers, getUser, signupUser, loginUser }

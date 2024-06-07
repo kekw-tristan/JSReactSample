@@ -69,6 +69,10 @@ nav button {
   font-size: 1em;
   margin-left: 10px;
 }
+nav span {
+  font-family: 'Press Start 2P', cursive;
+  color: #f1f1f1;
+}
 /*.container {
   width: 100px;
   height: auto;
