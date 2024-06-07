@@ -18,14 +18,19 @@ const Navbar = () => {
                     < img src={myLogo} alt="Logo" />
                 </Link>
                 <nav>
+                    <div className="nav-components">
+                    <Link to="/home">Home</Link>
+                    <Link to="/posts">Posts</Link>
+                    </div>
+
                     {user && (
-                        <div>
-                            <span>{user.username}</span>
+                        <div className="user-details">
+                            <span>@{user.username}</span>
                             <button onClick={handleClick}>Log out</button>
                         </div>
                     )}
                     {!user && (
-                        <div>
+                        <div className="user-details">
                             <Link to="/login">Einloggen</Link>
                             <Link to="/signup">Registrieren</Link>
                         </div>

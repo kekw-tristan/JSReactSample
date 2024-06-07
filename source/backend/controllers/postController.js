@@ -51,7 +51,7 @@ const createPost = async (req, res) => {
 
         // Check if req.user.username exists
         if (!user_username) {
-            return res.status(400).json({ error: 'User username not found' });
+            return res.status(400).json({ error: 'User not found' });
         }
 
         const post = await Post.create({ title, text, user_id, user_username })

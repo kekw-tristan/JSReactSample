@@ -36,12 +36,21 @@ const createComment = async (req, res) => {
     }
 
     if(emptyFields.length > 0) {
-        return res.status(400).json({ error: 'Please fill in the the field', emptyFields })
+        return res.status(400).json({ error: 'Please fill in the field', emptyFields })
     }
 
     // add to the database
     try {
-        const comment = await Comment.create({ text })
+        const user_id = req.user._id
+        const user_username = req.user.username
+        const post_id = req.post._id
+
+        // Check if req.user.username exists
+        if (!user_username) {
+            return res.status(400).json({ error: 'User not found' });
+        }
+
+        const comment = await Comment.create({ text, user_id, user_username, post_id })
         res.status(200).json(comment)
     } catch (error) {
         res.status(400).json({ error: error.message })
@@ -65,29 +74,4 @@ const deleteComment = async (req, res) => {
     res.status(200).json(comment)
 }
 
-// update a comment
-const updateComment = async (req, res) => {
-    const { id } = req.params
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(400).json({error: 'No such Comment'})
-    }
-
-    const comment = await Comment.findOneAndUpdate({_id: id}, {
-        ...req.body
-    })
-
-    if (!comment) {
-        return res.status(400).json({error: 'No such Comment'})
-    }
-
-    res.status(200).json(comment)
-}
-
-module.exports = {
-    getComments,
-    getComment,
-    createComment,
-    deleteComment,
-    updateComment
-}
+module.exports = { getComments, getComment, createComment, deleteComment }

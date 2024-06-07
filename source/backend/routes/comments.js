@@ -1,13 +1,11 @@
 const express = require('express')
-const {
-    getComments,
-    getComment,
-    createComment,
-    deleteComment,
-    updateComment
-} = require('../controllers/commentController')
+const { getComments, getComment, createComment, deleteComment } = require('../controllers/commentController')
+const requireAuth = require('../middleware/requireAuth')
 
 const router = express.Router()
+
+// require auth for all post routes
+router.use(requireAuth)
 
 // GET all comments
 router.get('/', getComments)
@@ -20,8 +18,5 @@ router.post('/', createComment)
 
 // DELETE a comment
 router.delete('/:id', deleteComment)
-
-// UPDATE a comment
-router.patch('/:id', updateComment)
 
 module.exports = router

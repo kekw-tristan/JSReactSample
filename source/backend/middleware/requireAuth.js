@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 const User = require('../models/userModel')
+const Post = require('../models/postModel')
 
 const requireAuth = async (req, res, next) => {
     // verify user is authenticated
