@@ -9,6 +9,9 @@ const PostDetails = ({ post }) => {
     const { user } = useAuthContext()
 
     const handleClick = async () => {
+        if (!user) {
+            return
+        }
 
         const response = await fetch('/api/posts/' + post._id, {
             method: 'DELETE',

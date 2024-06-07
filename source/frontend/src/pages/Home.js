@@ -13,6 +13,9 @@ const Home = () => {
     useEffect(() => {
         const fetchPosts = async () => {
             const response = await fetch('/api/posts', {
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                }
             })
             const json = await response.json()
 
