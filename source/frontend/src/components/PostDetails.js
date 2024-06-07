@@ -28,7 +28,7 @@ const PostDetails = ({ post }) => {
 
     return (
         <div className="post-details">
-            <h4>{post.title}</h4>
+            <h4>{post.user_username}: {post.title}</h4>
             <p><strong>{post.text}</strong></p>
             <p>{formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}</p>
             <span className="material-symbols-outlined" onClick={handleClick}>delete</span>

@@ -1,11 +1,5 @@
 const express = require('express')
-const {
-    getPosts,
-    getPost,
-    createPost,
-    deletePost,
-    updatePost
-} = require('../controllers/postController')
+const { getPosts, getPost, createPost, deletePost } = require('../controllers/postController')
 const requireAuth = require('../middleware/requireAuth')
 
 const router = express.Router()
@@ -24,8 +18,5 @@ router.post('/', createPost)
 
 // DELETE a post
 router.delete('/:id', deletePost)
-
-// UPDATE a post
-router.patch('/:id', updatePost)
 
 module.exports = router

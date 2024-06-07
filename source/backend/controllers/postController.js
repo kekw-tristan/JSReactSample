@@ -47,7 +47,14 @@ const createPost = async (req, res) => {
     // add to the database
     try {
         const user_id = req.user._id
-        const post = await Post.create({ title, text, user_id })
+        const user_username = req.user.username
+
+        // Check if req.user.username exists
+        if (!user_username) {
+            return res.status(400).json({ error: 'User username not found' });
+        }
+
+        const post = await Post.create({ title, text, user_id, user_username })
         res.status(200).json(post)
     } catch (error) {
         res.status(400).json({ error: error.message })
@@ -71,29 +78,4 @@ const deletePost = async (req, res) => {
     res.status(200).json(post)
 }
 
-// update a post
-const updatePost = async (req, res) => {
-    const { id } = req.params
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(400).json({error: 'No such Post'})
-    }
-
-    const post = await Post.findOneAndUpdate({_id: id}, {
-        ...req.body
-    })
-
-    if (!post) {
-        return res.status(400).json({error: 'No such Post'})
-    }
-
-    res.status(200).json(post)
-}
-
-module.exports = {
-    getPosts,
-    getPost,
-    createPost,
-    deletePost,
-    updatePost
-}
+module.exports = { getPosts, getPost, createPost, deletePost }
