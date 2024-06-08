@@ -14,10 +14,10 @@ body {
 }
 header {
   background: var(--primary);
+  height: auto;
 }
-.container {
+header .container {
   max-width: 1400px;
-  margin: 10px;
   padding: 10px 20px;
   display: flex;
   align-items: center;
