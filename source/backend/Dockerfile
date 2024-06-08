@@ -17,7 +17,6 @@ RUN npm install jsonwebtoken
 COPY . .
 
 ENV PORT=4000
-ENV MONGO_URI=mongodb+srv://lara:test1234@wa.iygjssy.mongodb.net/?retryWrites=true&w=majority&appName=wa
 ENV SECRET=webaufbau
 
 EXPOSE 4000
