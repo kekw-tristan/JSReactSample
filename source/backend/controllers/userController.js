@@ -1,7 +1,6 @@
 const User = require('../models/userModel')
 const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
-const Post = require("../models/postModel");
 
 const createToken = (_id) => {
     return jwt.sign({_id}, process.env.SECRET, { expiresIn: '3d' })
@@ -72,7 +71,7 @@ const deleteUser = async (req, res) => {
         return res.status(400).json({error: 'No such User'})
     }
 
-    const user = await Post.findOneAndDelete({_id: id})
+    const user = await User.findOneAndDelete({_id: id})
 
     if(!user) {
         return res.status(400).json({error: 'No such User'})
