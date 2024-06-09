@@ -1,5 +1,4 @@
 # Node modules
 source/backend/node_modules/
-db-data
 # dotenv
 .env
