@@ -78,4 +78,50 @@ const deletePost = async (req, res) => {
     res.status(200).json(post)
 }
 
-module.exports = { getPosts, getPost, createPost, deletePost }
+// upvote a post
+const upvotePost = async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'Invalid post ID' });
+    }
+
+    try {
+        const post = await Post.findById(id);
+        if (!post) {
+            return res.status(404).json({ error: 'Post not found' });
+        }
+
+        post.upvotes += 1;
+        await post.save();
+
+        res.status(200).json(post);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
+
+// downvote a post
+const downvotePost = async (req, res) => {
+    const {id} = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'Invalid post ID'});
+    }
+
+    try {
+        const post = await Post.findById(id);
+        if (!post) {
+            return res.status(404).json({error: 'Post not found'});
+        }
+
+        post.downvotes += 1;
+        await post.save();
+
+        res.status(200).json(post);
+    } catch (error) {
+        res.status(400).json({error: error.message});
+    }
+}
+
+module.exports = { getPosts, getPost, createPost, deletePost, upvotePost, downvotePost }

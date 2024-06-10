@@ -18,6 +18,14 @@ const postSchema = new Schema({
     user_username: {
         type: String,
         required: false
+    },
+    upvotes: {
+        type: Number,
+        default: 0
+    },
+    downvotes: {
+        type: Number,
+        default: 0
     }
 }, { timestamps: true })
 

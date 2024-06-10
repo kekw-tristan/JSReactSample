@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 
 // get all comments
 const getComments = async (req, res) => {
+
     const comments = await Comment.find({}).sort({createdAt: -1})
 
     res.status(200).json(comments)
@@ -36,21 +37,26 @@ const createComment = async (req, res) => {
     }
 
     if(emptyFields.length > 0) {
-        return res.status(400).json({ error: 'Please fill in the field', emptyFields })
+        return res.status(400).json({ error: 'Please fill the field', emptyFields })
     }
 
     // add to the database
     try {
+        const post_id = req.post._id
         const user_id = req.user._id
         const user_username = req.user.username
-        const post_id = req.post._id
 
         // Check if req.user.username exists
         if (!user_username) {
             return res.status(400).json({ error: 'User not found' });
         }
 
-        const comment = await Comment.create({ text, user_id, user_username, post_id })
+        // Check if req.post._id exists
+        if (!post_id) {
+            return res.status(400).json({ error: 'Post not found' });
+        }
+
+        const comment = await Comment.create({ text, post_id, user_id, user_username })
         res.status(200).json(comment)
     } catch (error) {
         res.status(400).json({ error: error.message })

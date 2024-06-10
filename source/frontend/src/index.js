@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import { PostsContextProvider } from "./context/PostContext";
 import { AuthContextProvider } from "./context/AuthContext";
-import {CommentsContext, CommentsContextProvider} from "./context/CommentContext";
+import { CommentsContextProvider} from "./context/CommentContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

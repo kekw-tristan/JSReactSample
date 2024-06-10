@@ -7,15 +7,15 @@ const commentSchema = new Schema({
         type: String,
         required: true
     },
+    post_id: {
+        type: false,
+        required: true
+    },
     user_id: {
         type: String,
         required: true
     },
     user_username: {
-        type: String,
-        required: true
-    },
-    post_id: {
         type: String,
         required: true
     }

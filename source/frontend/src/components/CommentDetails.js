@@ -1,5 +1,5 @@
-import { useCommentsContext } from '../hooks/useCommentsContext'
-import { useAuthContext } from '../hooks/useAuthContext'
+// import { useCommentsContext } from '../hooks/useCommentsContext'
+// import { useAuthContext } from '../hooks/useAuthContext'
 
 // date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
@@ -8,7 +8,7 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow'
         return (
             <div className="comment-details">
                 <p>{comment.text}</p>
-                <p>Commented by: {comment.user_username}</p>
+                <p>Posted {formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true })} by @{comment.user_username}</p>
             </div>
         );
     }
