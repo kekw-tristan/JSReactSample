@@ -91,10 +91,10 @@ const PostDetails = ({ post }) => {
             <button className="comment-button" onClick={handleCommentButtonClick}>
                 {showCommentForm ? 'Abbrechen' : 'Kommentieren'}
             </button>
-            {showCommentForm && <CommentForm post_id={post._id} />}
+            {post._id && showCommentForm && <CommentForm post_id={post._id} />}
             <div className="comments">
                 {post.comments && post.comments.map(comment => (
-                    <CommentDetails comment={comment} key={comment._id} />
+                    <CommentDetails comment={comment.text} key={comment._id} />
                 ))}
             </div>
             <span className="material-symbols-outlined" onClick={handleClick}>delete</span>

@@ -28,7 +28,8 @@ const getComment = async (req, res) => {
 
 // create a new comment
 const createComment = async (req, res) => {
-    const {text} = req.body
+
+    const {text, post_id} = req.body
 
     let emptyFields = []
 
@@ -42,7 +43,7 @@ const createComment = async (req, res) => {
 
     // add to the database
     try {
-        const post_id = req.post._id
+
         const user_id = req.user._id
         const user_username = req.user.username
 
@@ -53,7 +54,7 @@ const createComment = async (req, res) => {
 
         // Check if req.post._id exists
         if (!post_id) {
-            return res.status(400).json({ error: 'Post not found' });
+           return res.status(400).json({ error: 'Post not found' });
         }
 
         const comment = await Comment.create({ text, post_id, user_id, user_username })

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useCommentsContext } from '../hooks/useCommentsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 
-const CommentForm = () => {
+const CommentForm = (post_id) => {
     const { dispatch } = useCommentsContext()
     const { user } = useAuthContext()
 
@@ -18,7 +18,7 @@ const CommentForm = () => {
             return
         }
 
-        const comment = {text}
+        const comment = {post_id, text}
 
         const response = await fetch('/api/comments', {
             method: 'POST',
@@ -26,17 +26,18 @@ const CommentForm = () => {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${user.token}`
-
             }
         })
         const json = await response.json()
 
         if (!response.ok) {
+
             setError(json.error)
             setEmptyFields(json.emptyFields || [])
         }
 
         if (response.ok) {
+            console.log("asd")
             setText('')
             setError(null)
             setEmptyFields([])

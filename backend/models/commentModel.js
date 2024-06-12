@@ -9,7 +9,7 @@ const commentSchema = new Schema({
     },
     post_id: {
         type: String,
-        required: false
+        required: true
     },
     user_id: {
         type: String,
@@ -17,7 +17,7 @@ const commentSchema = new Schema({
     },
     user_username: {
         type: String,
-        required: true
+        required: false
     }
 }, { timestamps: true })
 
