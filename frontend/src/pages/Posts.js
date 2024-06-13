@@ -56,7 +56,7 @@ const Posts = () => {
                         <CommentForm />
                         <div className="comments">
                             {comments && comments.map(comment => (
-                                <CommentDetails post={comment} key={post._id} />
+                                <CommentDetails comment={comment} key={comment._id} />
                             ))}
                         </div>
                     </PostDetails>

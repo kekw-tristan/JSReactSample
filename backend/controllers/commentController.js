@@ -29,13 +29,17 @@ const getComment = async (req, res) => {
 // create a new comment
 const createComment = async (req, res) => {
 
-    const {text, post_id} = req.body
+    const text = req.body.text
+    const post_id = JSON.parse(req.body.post_id).post_id
+
 
     let emptyFields = []
 
     if (!text) {
         emptyFields.push('text')
     }
+
+    if(!post_id)
 
     if(emptyFields.length > 0) {
         return res.status(400).json({ error: 'Please fill the field', emptyFields })
@@ -46,7 +50,6 @@ const createComment = async (req, res) => {
 
         const user_id = req.user._id
         const user_username = req.user.username
-
         // Check if req.user.username exists
         if (!user_username) {
             return res.status(400).json({ error: 'User not found' });
@@ -57,7 +60,7 @@ const createComment = async (req, res) => {
            return res.status(400).json({ error: 'Post not found' });
         }
 
-        const comment = await Comment.create({ text, post_id, user_id, user_username })
+        const comment = await Comment.create({ text, post_id , user_id, user_username })
         res.status(200).json(comment)
     } catch (error) {
         res.status(400).json({ error: error.message })

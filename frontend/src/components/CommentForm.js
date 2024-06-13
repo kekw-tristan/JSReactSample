@@ -2,9 +2,12 @@ import { useState } from 'react'
 import { useCommentsContext } from '../hooks/useCommentsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 
-const CommentForm = (post_id) => {
+const CommentForm = post_idobj => {
     const { dispatch } = useCommentsContext()
     const { user } = useAuthContext()
+
+
+    let post_id = JSON.stringify(post_idobj)
 
     const [text, setText] = useState('')
     const [error, setError] = useState(null)
@@ -18,7 +21,7 @@ const CommentForm = (post_id) => {
             return
         }
 
-        const comment = {post_id, text}
+        const comment = {text, post_id, }
 
         const response = await fetch('/api/comments', {
             method: 'POST',
