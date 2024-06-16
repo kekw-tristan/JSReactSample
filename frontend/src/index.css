@@ -99,15 +99,18 @@ h3 {
   font-size: 0.9em;
   color: #555;
 }
-.post-details span {
+.action-icons {
   position: absolute;
   top: 20px;
   right: 20px;
+}
+.material-symbols-outlined {
   cursor: pointer;
   background: #f1f1f1;
   padding: 6px;
   border-radius: 50%;
   color: #333;
+  margin-left: 10px;
 }
 .important {
   color: #010101;
