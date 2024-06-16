@@ -112,6 +112,9 @@ h3 {
   color: #333;
   margin-left: 10px;
 }
+.material-symbols-outlined.voted {
+  color: #ff4500; /* Ändere die Farbe oder das Styling nach Bedarf */
+}
 .important {
   color: #010101;
   font-size: large;
