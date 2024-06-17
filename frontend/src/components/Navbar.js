@@ -14,13 +14,13 @@ const Navbar = () => {
     return (
         <header>
             <div className="container">
-                <Link to="/">
+                <Link to="/home">
                     < img src={myLogo} alt="Logo" />
                 </Link>
                 <nav>
                     <div className="nav-components">
                     <Link to="/home">Home</Link>
-                    <Link to="/posts">Posts</Link>
+                    <Link to="/">Posts</Link>
                     </div>
 
                     {user && (

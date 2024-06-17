@@ -123,7 +123,7 @@ const PostDetails = ({ post, comments }) => {
                         <CommentDetails key={comment._id} comment={comment} />
                     ))
                 ) : (
-                    <p>Keine Kommentare verfügbar.</p>
+                    <p></p>
                 )}
             </div>
         </div>

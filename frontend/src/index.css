@@ -113,6 +113,17 @@ h3 {
   color: #333;
   margin-left: 10px;
 }
+.comment-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.comment-content {
+  flex: 1;
+}
 .important {
   color: #010101;
   font-size: large;

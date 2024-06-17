@@ -41,9 +41,13 @@ const CommentDetails = ({ comment }) => {
 
     return (
         <div className="comment-details">
-            <div className="comment-text">{comment.text}</div>
-            <p>Posted {formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true })} by @{comment.user_username}</p>
-            <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
+            <div className="comment-content">
+                <div className="comment-text">{comment.text}</div>
+                <p>Posted {formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true })} by @{comment.user_username}</p>
+            </div>
+            {user && user.username === comment.user_username && (
+                <span className="material-symbols-outlined delete-icon" onClick={handleClick}>delete</span>
+            )}
         </div>
     );
 }
