@@ -19,10 +19,10 @@ router.post('/', createPost)
 // DELETE a post
 router.delete('/:id', deletePost)
 
-// Upvote-Route
-router.patch('/:id', upvotePost);
+// Route für Upvote
+router.patch('/:id/upvote', upvotePost);
 
-// Downvote-Route
-router.patch('/:id', downvotePost);
+// Route für Downvote
+router.patch('/:id/downvote', downvotePost);
 
 module.exports = router

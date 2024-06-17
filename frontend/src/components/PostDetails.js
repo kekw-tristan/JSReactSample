@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import CommentForm from './CommentForm'
 import CommentDetails from './CommentDetails'
 import formatDistanceToNow from "date-fns/formatDistanceToNow"
@@ -8,6 +8,8 @@ import { useAuthContext } from '../hooks/useAuthContext'
 
 const PostDetails = ({ post, comments }) => {
     const [showCommentForm, setShowCommentForm] = useState(false)
+        const [upvotes, setUpvotes] = useState(post.upvotes);
+        const [downvotes, setDownvotes] = useState(post.downvotes);
     const { dispatch } = usePostsContext()
     const { user } = useAuthContext()
 
@@ -45,13 +47,18 @@ const PostDetails = ({ post, comments }) => {
         }
     }
 
+    useEffect(() => {
+        setUpvotes(post.upvotes);
+        setDownvotes(post.downvotes);
+    }, [post]);
+
     const handleUpvote = async () => {
         if (!user) {
             return
         }
 
         try {
-            const response = await fetch(`/api/posts/${post._id}`, {
+            const response = await fetch(`/api/posts/${post._id}/upvote`, {
                 method: 'PATCH',
                 headers: {
                     'Authorization': `Bearer ${user.token}`
@@ -63,6 +70,7 @@ const PostDetails = ({ post, comments }) => {
         } catch (error) {
             console.error('Failed to upvote the post:', error)
         }
+        setUpvotes(upvotes + 1);
     }
 
     const handleDownvote = async () => {
@@ -71,7 +79,7 @@ const PostDetails = ({ post, comments }) => {
         }
 
         try {
-            const response = await fetch(`/api/posts/${post._id}`, {
+            const response = await fetch(`/api/posts/${post._id}/downvote`, {
                 method: 'PATCH',
                 headers: {
                     'Authorization': `Bearer ${user.token}`
@@ -87,6 +95,7 @@ const PostDetails = ({ post, comments }) => {
         } catch (error) {
             console.error('Failed to downvote the post:', error)
         }
+        setDownvotes(downvotes + 1);
     }
 
     return (
@@ -94,11 +103,12 @@ const PostDetails = ({ post, comments }) => {
             <h4>{post.title}</h4>
             <div className="important">{post.text}</div>
             <p>Posted {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })} by @{post.user_username}</p>
-            <div>
-                <button onClick={handleUpvote}>Upvote</button>
-                <span>{post.upvotes}</span>
-                <button onClick={handleDownvote}>Downvote</button>
-                <span>{post.downvotes}</span>
+            <div className="action-icons">
+                <span className="material-symbols-outlined" onClick={handleUpvote}>arrow_upward</span>
+                <span>{upvotes}</span>
+                <span className="material-symbols-outlined" onClick={handleDownvote}>arrow_downward</span>
+                <span>{downvotes}</span>
+                <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
             </div>
             <button className="comment-button" onClick={handleCommentButtonClick}>
                 {showCommentForm ? 'Abbrechen' : 'Kommentieren'}
@@ -109,7 +119,6 @@ const PostDetails = ({ post, comments }) => {
                     <CommentDetails comment={comment}/>
                 ))}
             </div>
-            <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
         </div>
     );
 };
