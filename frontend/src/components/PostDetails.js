@@ -111,7 +111,9 @@ const PostDetails = ({ post, comments }) => {
                 <span>{upvotes}</span>
                 <span className="material-symbols-outlined" onClick={handleDownvote}>arrow_downward</span>
                 <span>{downvotes}</span>
-                <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
+                {post.user_username === user.username && (
+                    <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
+                )}
             </div>
             <button className="comment-button" onClick={handleCommentButtonClick}>
                 {showCommentForm ? 'Abbrechen' : 'Kommentieren'}
