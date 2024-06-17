@@ -9,7 +9,7 @@ const CommentDetails = ({comment}) => {
 
     return (
         <div className="comment-details">
-            <p>{comment.text}</p>
+            <div className="comment-text">{comment.text}</div>
             <p>Posted {formatDistanceToNow(new Date(comment.createdAt), {addSuffix: true})} by
                 @{comment.user_username}</p>
         </div>

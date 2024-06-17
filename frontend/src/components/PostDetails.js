@@ -1,51 +1,16 @@
-import { useState, useEffect } from 'react'
-import CommentForm from './CommentForm'
-import CommentDetails from './CommentDetails'
-import formatDistanceToNow from "date-fns/formatDistanceToNow"
-import { usePostsContext } from '../hooks/usePostsContext'
-import { useAuthContext } from '../hooks/useAuthContext'
-
+import { useState, useEffect } from 'react';
+import CommentForm from './CommentForm';
+import CommentDetails from './CommentDetails';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import { usePostsContext } from '../hooks/usePostsContext';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const PostDetails = ({ post, comments }) => {
-    const [showCommentForm, setShowCommentForm] = useState(false)
-        const [upvotes, setUpvotes] = useState(post.upvotes);
-        const [downvotes, setDownvotes] = useState(post.downvotes);
-    const { dispatch } = usePostsContext()
-    const { user } = useAuthContext()
-
-    // remove comments of other posts
-    if(comments)
-    {
-        for(let index = 0; index < comments.length; index++)
-        {
-            if(comments[index].post_id !== post._id)
-            {
-                comments.splice(index,index)
-            }
-        }
-    }
-
-    const handleCommentButtonClick = () => {
-        setShowCommentForm(!showCommentForm)
-    }
-
-    const handleClick = async () => {
-        if (!user) {
-            return
-        }
-
-        const response = await fetch('/api/posts/' + post._id, {
-            method: 'DELETE',
-            headers: {
-                'Authorization': `Bearer ${user.token}`
-            }
-        })
-        const json = await response.json();
-
-        if (response.ok) {
-            dispatch({type: 'DELETE_POST', payload: json});
-        }
-    }
+    const [showCommentForm, setShowCommentForm] = useState(false);
+    const [upvotes, setUpvotes] = useState(post.upvotes);
+    const [downvotes, setDownvotes] = useState(post.downvotes);
+    const { dispatch } = usePostsContext();
+    const { user } = useAuthContext();
 
     useEffect(() => {
         setUpvotes(post.upvotes);
@@ -54,7 +19,7 @@ const PostDetails = ({ post, comments }) => {
 
     const handleUpvote = async () => {
         if (!user) {
-            return
+            return;
         }
 
         try {
@@ -63,19 +28,19 @@ const PostDetails = ({ post, comments }) => {
                 headers: {
                     'Authorization': `Bearer ${user.token}`
                 }
-            })
+            });
 
             const json = await response.json();
-            dispatch({ type: 'UPDATE_POST', payload: json })
+            dispatch({ type: 'UPDATE_POST', payload: json });
+            setUpvotes(upvotes + 1);
         } catch (error) {
-            console.error('Failed to upvote the post:', error)
+            console.error('Failed to upvote the post:', error);
         }
-        setUpvotes(upvotes + 1);
-    }
+    };
 
     const handleDownvote = async () => {
         if (!user) {
-            return
+            return;
         }
 
         try {
@@ -84,19 +49,45 @@ const PostDetails = ({ post, comments }) => {
                 headers: {
                     'Authorization': `Bearer ${user.token}`
                 }
-            })
+            });
 
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`)
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
 
             const json = await response.json();
-            dispatch({ type: 'UPDATE_POST', payload: json })
+            dispatch({ type: 'UPDATE_POST', payload: json });
+            setDownvotes(downvotes + 1);
         } catch (error) {
-            console.error('Failed to downvote the post:', error)
+            console.error('Failed to downvote the post:', error);
         }
-        setDownvotes(downvotes + 1);
-    }
+    };
+
+    const handleClick = async () => {
+        if (!user) {
+            return;
+        }
+
+        const response = await fetch(`/api/posts/${post._id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${user.token}`
+            }
+        });
+
+        const json = await response.json();
+
+        if (response.ok) {
+            dispatch({ type: 'DELETE_POST', payload: json });
+        }
+    };
+
+    const handleCommentButtonClick = () => {
+        setShowCommentForm(!showCommentForm);
+    };
+
+    // Filtern der Kommentare, die zur aktuellen Post-ID gehören
+    const filteredComments = comments ? comments.filter(comment => comment.post_id === post._id) : [];
 
     return (
         <div className="post-details">
@@ -115,9 +106,13 @@ const PostDetails = ({ post, comments }) => {
             </button>
             {post._id && showCommentForm && <CommentForm post_id={post._id.toString()} />}
             <div className="comments">
-                {comments && comments.map(comment => (
-                    <CommentDetails comment={comment}/>
-                ))}
+                {filteredComments.length > 0 ? (
+                    filteredComments.map(comment => (
+                        <CommentDetails key={comment._id} comment={comment} />
+                    ))
+                ) : (
+                    <p>Keine Kommentare verfügbar.</p>
+                )}
             </div>
         </div>
     );

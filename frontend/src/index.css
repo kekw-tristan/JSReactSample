@@ -88,15 +88,16 @@ h3 {
   padding: 20px;
   position: relative;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+  height: auto;
 }
 .post-details h4 {
   margin: 0 0 10px 0;
-  font-size: 1.2em;
+  font-size: x-large;
   color: var(--primary);
 }
 .post-details p {
   margin: 0;
-  font-size: 0.9em;
+  font-size: small;
   color: #555;
 }
 .action-icons {
@@ -126,6 +127,19 @@ h3 {
   border-radius: 9px;
   cursor: pointer;
   margin-top: 20px;
+}
+.comments {
+  height: auto;
+}
+.comment-details {
+  margin-top: 20px;
+}
+.comment-text {
+  color: black;
+  font-size: medium;
+}
+.comment-details p {
+  font-size: small;
 }
 /* new post form */
 label, input {
