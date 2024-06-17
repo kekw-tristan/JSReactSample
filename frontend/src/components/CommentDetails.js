@@ -4,13 +4,16 @@
 // date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
-    const CommentDetails = ({ comment }) => {
-        return (
-            <div className="comment-details">
-                <p>{comment.text}</p>
-                <p>Posted {formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true })} by @{comment.user_username}</p>
-            </div>
-        );
-    }
+// for later use : <p>Posted {formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true })} by @{comment.user_username}</p>
+const CommentDetails = ({comment}) => {
 
-    export default CommentDetails
+    return (
+        <div className="comment-details">
+            <p>{comment.text}</p>
+            <p>Posted {formatDistanceToNow(new Date(comment.createdAt), {addSuffix: true})} by
+                @{comment.user_username}</p>
+        </div>
+    );
+}
+
+export default CommentDetails

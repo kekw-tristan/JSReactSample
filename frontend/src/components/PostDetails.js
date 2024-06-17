@@ -6,10 +6,22 @@ import { usePostsContext } from '../hooks/usePostsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 
 
-const PostDetails = ({ post }) => {
+const PostDetails = ({ post, comments }) => {
     const [showCommentForm, setShowCommentForm] = useState(false)
     const { dispatch } = usePostsContext()
     const { user } = useAuthContext()
+
+    // remove comments of other posts
+    if(comments)
+    {
+        for(let index = 0; index < comments.length; index++)
+        {
+            if(comments[index].post_id !== post._id)
+            {
+                comments.splice(index,index)
+            }
+        }
+    }
 
     const handleCommentButtonClick = () => {
         setShowCommentForm(!showCommentForm)
@@ -93,8 +105,8 @@ const PostDetails = ({ post }) => {
             </button>
             {post._id && showCommentForm && <CommentForm post_id={post._id.toString()} />}
             <div className="comments">
-                {post.comments && post.comments.map(comment => (
-                    <CommentDetails comment={comment.text} key={post._id} />
+                {comments && comments.map(comment => (
+                    <CommentDetails comment={comment}/>
                 ))}
             </div>
             <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
