@@ -131,6 +131,9 @@ h3 {
 .comments {
   height: auto;
 }
+.comments p {
+  margin-top: 15px;
+}
 .comment-details {
   margin-top: 20px;
 }

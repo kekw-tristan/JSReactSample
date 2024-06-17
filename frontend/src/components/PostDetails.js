@@ -68,19 +68,31 @@ const PostDetails = ({ post, comments }) => {
             return;
         }
 
-        const response = await fetch(`/api/posts/${post._id}`, {
-            method: 'DELETE',
-            headers: {
-                'Authorization': `Bearer ${user.token}`
+        try {
+            // Überprüfen, ob der Benutzer der Autor des Posts ist
+            if (post.user_username !== user.username) {
+                console.error('Nur der Autor kann den Post löschen.');
+                return;
             }
-        });
 
-        const json = await response.json();
+            const response = await fetch(`/api/posts/${post._id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                }
+            });
 
-        if (response.ok) {
-            dispatch({ type: 'DELETE_POST', payload: json });
+            const json = await response.json();
+
+            if (response.ok) {
+                dispatch({ type: 'DELETE_POST', payload: json });
+            } else {
+                console.error('Fehler beim Löschen des Posts:', json.error);
+            }
+        } catch (error) {
+            console.error('Fehler beim Löschen des Posts:', error);
         }
-    };
+    }
 
     const handleCommentButtonClick = () => {
         setShowCommentForm(!showCommentForm);
