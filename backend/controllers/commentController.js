@@ -39,8 +39,6 @@ const createComment = async (req, res) => {
         emptyFields.push('text')
     }
 
-    if(!post_id)
-
     if(emptyFields.length > 0) {
         return res.status(400).json({ error: 'Please fill the field', emptyFields })
     }
@@ -84,4 +82,10 @@ const deleteComment = async (req, res) => {
     res.status(200).json(comment)
 }
 
-module.exports = { getComments, getComment, createComment, deleteComment }
+const deleteComments = async (req, res) => {
+    const comments = await Comment.findOneAndDelete({})
+
+    res.status(200).json(comments)
+}
+
+module.exports = { getComments, getComment, createComment, deleteComment, deleteComments }

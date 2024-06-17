@@ -1,5 +1,5 @@
 const express = require('express')
-const { getComments, getComment, createComment, deleteComment } = require('../controllers/commentController')
+const { getComments, getComment, createComment, deleteComment, deleteComments } = require('../controllers/commentController')
 const requireAuth = require('../middleware/requireAuth')
 
 const router = express.Router()
@@ -18,5 +18,8 @@ router.post('/', createComment)
 
 // DELETE a comment
 router.delete('/:id', deleteComment)
+
+// DELETE all comments
+router.delete('/', deleteComments)
 
 module.exports = router
