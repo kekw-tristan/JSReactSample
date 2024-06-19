@@ -7,15 +7,10 @@ import { useAuthContext } from '../hooks/useAuthContext';
 
 const PostDetails = ({ post, comments }) => {
     const [showCommentForm, setShowCommentForm] = useState(false);
-    const [upvotes, setUpvotes] = useState(post.upvotes);
-    const [downvotes, setDownvotes] = useState(post.downvotes);
     const { dispatch } = usePostsContext();
     const { user } = useAuthContext();
 
-    useEffect(() => {
-        setUpvotes(post.upvotes);
-        setDownvotes(post.downvotes);
-    }, [post]);
+    let likes = post.likes.length - post.dislikes.length
 
     const handleUpvote = async () => {
         if (!user) {
@@ -32,7 +27,8 @@ const PostDetails = ({ post, comments }) => {
 
             const json = await response.json();
             dispatch({ type: 'UPDATE_POST', payload: json });
-            setUpvotes(upvotes + 1);
+            likes = post.likes.length - post.dislikes.length
+
         } catch (error) {
             console.error('Failed to upvote the post:', error);
         }
@@ -51,13 +47,10 @@ const PostDetails = ({ post, comments }) => {
                 }
             });
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
             const json = await response.json();
             dispatch({ type: 'UPDATE_POST', payload: json });
-            setDownvotes(downvotes + 1);
+            likes = post.likes.length - post.dislikes.length
+
         } catch (error) {
             console.error('Failed to downvote the post:', error);
         }
@@ -108,9 +101,8 @@ const PostDetails = ({ post, comments }) => {
             <p>Posted {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })} by @{post.user_username}</p>
             <div className="action-icons">
                 <span className="material-symbols-outlined" onClick={handleUpvote}>arrow_upward</span>
-                <span>{upvotes}</span>
+                <span>{likes}</span>
                 <span className="material-symbols-outlined" onClick={handleDownvote}>arrow_downward</span>
-                <span>{downvotes}</span>
                 {post.user_username === user.username && (
                     <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
                 )}

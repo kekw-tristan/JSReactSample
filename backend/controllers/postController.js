@@ -92,10 +92,17 @@ const upvotePost = async (req, res) => {
             return res.status(404).json({ error: 'Post not found' });
         }
 
-        post.upvotes += 1;
+        if (post.likes.indexOf(req.user._id) === -1 && post.dislikes.indexOf(req.user._id) === -1){
+            console.log(req.user._id)
+            post.likes.push(req.user._id)
+        }else if (post.likes.indexOf(req.user._id) === -1 && post.dislikes.indexOf(req.user._id) > -1) {
+            post.dislikes.splice(post.dislikes.indexOf(req.user._id), 1)
+            post.likes.push(req.user._id)
+        }
+
         await post.save();
 
-        res.status(200).json(post);
+        res.status(200).json(post)
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
@@ -111,11 +118,19 @@ const downvotePost = async (req, res) => {
 
     try {
         const post = await Post.findById(id);
+
         if (!post) {
             return res.status(404).json({error: 'Post not found'});
         }
 
-        post.downvotes += 1;
+        if (post.likes.indexOf(req.user._id) === -1 && post.dislikes.indexOf(req.user._id) === -1){
+            console.log(req.user._id)
+            post.dislikes.push(req.user._id)
+        }else if (post.dislikes.indexOf(req.user._id) === -1 && post.likes.indexOf(req.user._id) > -1) {
+            post.likes.splice(post.likes.indexOf(req.user._id), 1)
+            post.dislikes.push(req.user._id)
+        }
+
         await post.save();
 
         res.status(200).json(post);

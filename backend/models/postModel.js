@@ -19,14 +19,15 @@ const postSchema = new Schema({
         type: String,
         required: false
     },
-    upvotes: {
-        type: Number,
-        default: 0
+    likes: {
+        type: [String],
+        required: false
     },
-    downvotes: {
-        type: Number,
-        default: 0
-    }
+    dislikes: {
+        type: [String],
+        required: false
+    },
+
 }, { timestamps: true })
 
 module.exports = mongoose.model('Post', postSchema)
