@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import CommentForm from './CommentForm';
 import CommentDetails from './CommentDetails';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';

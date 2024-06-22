@@ -25,15 +25,13 @@ const CommentDetails = ({ comment }) => {
                 }
             });
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
             const json = await response.json();
 
-            // Aktion auslösen, um den Kommentar aus dem Redux-Zustand zu entfernen
-            dispatch({ type: 'DELETE_COMMENT', payload: { _id: comment._id } });
-
+            if (response.ok) {
+                dispatch({ type: 'DELETE_COMMENT', payload: json });
+            } else {
+                console.error('Fehler beim Löschen des Kommentars:', json.error);
+            }
         } catch (error) {
             console.error('Fehler beim Löschen des Kommentars:', error);
         }
@@ -45,7 +43,7 @@ const CommentDetails = ({ comment }) => {
                 <div className="comment-text">{comment.text}</div>
                 <p>Posted {formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true })} by @{comment.user_username}</p>
             </div>
-            {user && user.username === comment.user_username && (
+            {user.username === comment.user_username && (
                 <span className="material-symbols-outlined delete-icon" onClick={handleClick}>delete</span>
             )}
         </div>
