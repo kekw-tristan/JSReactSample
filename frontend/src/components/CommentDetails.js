@@ -1,9 +1,9 @@
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
-import { usePostsContext } from "../hooks/usePostsContext";
+import { useCommentsContext } from "../hooks/useCommentsContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 const CommentDetails = ({ comment }) => {
-    const { dispatch } = usePostsContext();
+    const { dispatch } = useCommentsContext();
     const { user } = useAuthContext();
 
     const handleClick = async () => {
@@ -12,7 +12,6 @@ const CommentDetails = ({ comment }) => {
         }
 
         try {
-            // Überprüfen, ob der Benutzer der Autor des Kommentars ist
             if (comment.user_username !== user.username) {
                 console.error('Nur der Autor kann den Kommentar löschen.');
                 return;
@@ -25,13 +24,13 @@ const CommentDetails = ({ comment }) => {
                 }
             });
 
-            const json = await response.json();
-
-            if (response.ok) {
-                dispatch({ type: 'DELETE_COMMENT', payload: json });
-            } else {
-                console.error('Fehler beim Löschen des Kommentars:', json.error);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
+
+            // const json = await response.json();
+            dispatch({ type: 'DELETE_COMMENT', payload: { _id: comment._id } });
+
         } catch (error) {
             console.error('Fehler beim Löschen des Kommentars:', error);
         }
