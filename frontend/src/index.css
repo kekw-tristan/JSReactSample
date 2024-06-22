@@ -116,12 +116,6 @@ h3 {
   color: #333;
   margin-left: 10px;
 }
-.upvoted {
-  color: green;
-}
-.downvoted {
-  color: red;
-}
 .comment-details {
   display: flex;
   justify-content: space-between;

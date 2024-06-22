@@ -1,0 +1,59 @@
+28.04.2024 Lara, Tristan: Teamvorstellung vorbereiten, APIs recherchieren
+
+29.04.2024 Lara, Tristan: Präsentation
+
+03.05.2024 Lara: Einarbeitung ins Thema, Programme installieren, Datenbank verbinden, mit Node.js auseinandersetzen, Daten in Datenbank einfügen
+
+03.05.2024 Tristan: Einarbeitung ins Thema, Programme installieren, Datenbank verbinden, mit Node.js auseinandersetzen
+
+10.05.2024 Lara: React ausprobiert, MongoDB ausprobiert, Postman ausprobiert
+
+20.05.2024 Lara: React ausprobiert, MongoDB ausprobiert, Postman ausprobiert
+
+21.05.2024 Lara: React ausprobiert, MongoDB ausprobiert, Postman ausprobiert
+
+24.05.2024 Lara: postController, postModel, posts.js geschrieben, Postman Zeug hinzugefügt, frontend generiert, Datenbankanbindung, server.js überarbeitet
+
+26.05.2024 Lara: gameController, gameModel, games.js geschrieben, userController, userModel, users.js geschrieben, Postman Zeug hinzugefügt
+
+27.05.2024 Lara: commentController, commentModel, comments.js geschrieben, Postman Zeug hinzugefügt, Bilder für Games ins Repo getan, Frontend bearbeitet, Beiträge können gepostet werden
+
+27.05.2024 Tristan: Auseinandersetzung mit Docker, Dockerfile für Frontend und Compose
+
+02.06.2024 Tristan: Proxy Fehler gefixed
+
+03.06.2024 Lara: Login, Registrieren, Authentifizierung gemacht + Frontend-Seiten dafür, Navbar bearbeitet
+
+06.06.2024 Lara: Login, Registrieren, Authentifizierung verbessert
+
+07.06.2024 Lara: Bugs gefixed, Get-Methode für einen User und alle User, Usernames zu Beiträgen hinzugefügt
+
+08.06.2024 Lara: änderungen an navbar, comments angefangen, deleteUser gefixed, css Anpassungen
+
+08.06.2024 Tristan: mongodb auf lokale docker instanz
+
+08.06.2024 Lara, Tristan: Vorbereitung für Zwischenpräsentation angefangen
+
+09.06.2024 Tristan: Dockerfile bug fix, docker compose up funktioniert, gepushed in release branch
+
+09.06.2024 Lara: Zwischenpräsentation fertig gemacht
+
+10.06.2024 Lara: comments und votes funktionieren fast, source folder entfernt, bugfixes
+
+10.06.2024 Lara, Tristan: Zwischenpräsentation
+
+12.06.2024 Tristan: bug fixes
+
+13.06.2024 Tristan: bugfix Kommentare gehören jetzt zu bestimmtem post
+
+15.06.2024 Lara: Votes bearbeitet
+
+16.06.2024 Lara: Dockerfile umbenannt, css, Votes bearbeitet
+
+17.06.2024 Tristan: Kommentare werden jetzt auf der Seite angezeigt
+
+17.06.2024 Lara: Kommentare erneut gefixed, comments und posts können nur noch vom jeweiligen autor gelöscht werden und der button dafür kann nur noch vom jeweiligen autor gesehen weredn, css, votes bearbeitet
+
+20.06.2024 Lara, Tristan: externe APIs besprochen
+
+21.06.2024 Lara: Kommentare gefixed (werden direkt gelöscht), Votes gefixed (werden ebenfalls direkt gelöscht), css

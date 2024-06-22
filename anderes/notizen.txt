@@ -1,0 +1,23 @@
+npm init -y in backend folder
+npm install express
+npm install -g nodemon
+npm install dotenv
+in package.json oben rein "dev": "nodemon server.js"
+npm install mongoose
+
+cd..
+npx create-react-app frontend
+cd frontend
+npm install react-router-dom
+npm start
+npm install date-fns (frontend, schöne zeitangaben)
+
+npm install bcrypt (im backend, fürs hashen)
+npm install validator (backend)
+npm install jsonwebtoken (backend)
+
+to do:
+- gamesseite
+- kennzeichnen ob schon gevotet wurde
+- apis extern
+- apis von anderen
