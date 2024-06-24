@@ -100,10 +100,71 @@ const updateGame = async (req, res) => {
     res.status(200).json(game)
 }
 
-module.exports = {
-    getGames,
-    getGame,
-    createGame,
-    deleteGame,
-    updateGame
+// upvote a game
+const upvoteGame = async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'Invalid game ID' });
+    }
+
+    try {
+        const game = await Game.findById(id);
+        if (!game) {
+            return res.status(404).json({ error: 'Game not found' });
+        }
+
+        if (game.likes.indexOf(req.user._id) === -1 && game.dislikes.indexOf(req.user._id) === -1){
+            console.log(req.user._id)
+            game.likes.push(req.user._id)
+        }
+        else if (game.likes.indexOf(req.user._id) === -1 && game.dislikes.indexOf(req.user._id) > -1) {
+            game.dislikes.splice(game.dislikes.indexOf(req.user._id), 1)
+            game.likes.push(req.user._id)
+        }
+        else if (game.likes.indexOf(req.user._id) > -1 && game.dislikes.indexOf(req.user._id) === -1){
+            game.likes.splice(game.likes.indexOf(req.user._id), 1)
+        }
+
+        await game.save();
+
+        res.status(200).json(game)
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
 }
+
+// downvote a game
+const downvoteGame = async (req, res) => {
+    const {id} = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'Invalid game ID'});
+    }
+
+    try {
+        const game = await Game.findById(id);
+
+        if (!game) {
+            return res.status(404).json({error: 'Game not found'});
+        }
+
+        if (game.likes.indexOf(req.user._id) === -1 && game.dislikes.indexOf(req.user._id) === -1) {
+            console.log(req.user._id)
+            game.dislikes.push(req.user._id)
+        } else if (game.dislikes.indexOf(req.user._id) === -1 && game.likes.indexOf(req.user._id) > -1) {
+            game.likes.splice(game.likes.indexOf(req.user._id), 1)
+            game.dislikes.push(req.user._id)
+        } else if (game.dislikes.indexOf(req.user._id) > -1 && game.likes.indexOf(req.user._id) === -1) {
+            game.dislikes.splice(game.dislikes.indexOf(req.user._id), 1)
+        }
+
+        await game.save();
+
+        res.status(200).json(game);
+    } catch (error) {
+        res.status(400).json({error: error.message});
+    }
+}
+
+module.exports = { getGames, getGame, createGame, deleteGame, updateGame, upvoteGame, downvoteGame }

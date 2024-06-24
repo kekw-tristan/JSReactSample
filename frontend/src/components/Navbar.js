@@ -19,8 +19,9 @@ const Navbar = () => {
                 </Link>
                 <nav>
                     <div className="nav-components">
-                    <Link to="/home">Home</Link>
-                    <Link to="/">Posts</Link>
+                        <Link to="/home">Home</Link>
+                        <Link to="/posts">Posts</Link>
+                        <Link to="/documentation">Dokumentation</Link>
                     </div>
 
                     {user && (
