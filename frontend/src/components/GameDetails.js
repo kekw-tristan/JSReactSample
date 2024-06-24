@@ -54,9 +54,9 @@ const GameDetails = ({ game }) => {
     return (
         <div className="game-details">
             <h4>{game.title}</h4>
-            <div className="important">Beschreibung:{game.description}</div>
-            <div className="important">Entwickler:{game.developer}</div>
-            <div className="important">Genre:{game.genre}</div>
+            <div className="important">Beschreibung: {game.description}</div>
+            <div className="important">Entwickler: {game.developer}</div>
+            <div className="important">Genre: {game.genre}</div>
             <div className="important">Erschienen am: {game.releaseDate}</div>
             <div className="action-icons">
                 <span className="material-symbols-outlined" onClick={handleUpvote}>arrow_upward</span>
