@@ -92,16 +92,16 @@ const upvotePost = async (req, res) => {
             return res.status(404).json({ error: 'Post not found' });
         }
 
-        if (post.likes.indexOf(req.user._id) === -1 && post.dislikes.indexOf(req.user._id) === -1){
-            console.log(req.user._id)
-            post.likes.push(req.user._id)
+        if (post.likes.indexOf(req.user.username) === -1 && post.dislikes.indexOf(req.user.username) === -1){
+            console.log(req.user.username)
+            post.likes.push(req.user.username)
         }
-        else if (post.likes.indexOf(req.user._id) === -1 && post.dislikes.indexOf(req.user._id) > -1) {
-            post.dislikes.splice(post.dislikes.indexOf(req.user._id), 1)
-            post.likes.push(req.user._id)
+        else if (post.likes.indexOf(req.user.username) === -1 && post.dislikes.indexOf(req.user.username) > -1) {
+            post.dislikes.splice(post.dislikes.indexOf(req.user.username), 1)
+            post.likes.push(req.user.username)
         }
-        else if (post.likes.indexOf(req.user._id) > -1 && post.dislikes.indexOf(req.user._id) === -1){
-            post.likes.splice(post.likes.indexOf(req.user._id), 1)
+        else if (post.likes.indexOf(req.user.username) > -1 && post.dislikes.indexOf(req.user.username) === -1){
+            post.likes.splice(post.likes.indexOf(req.user.username), 1)
         }
 
         await post.save();
@@ -127,16 +127,16 @@ const downvotePost = async (req, res) => {
             return res.status(404).json({error: 'Post not found'});
         }
 
-        if (post.likes.indexOf(req.user._id) === -1 && post.dislikes.indexOf(req.user._id) === -1){
-            console.log(req.user._id)
-            post.dislikes.push(req.user._id)
+        if (post.likes.indexOf(req.user.username) === -1 && post.dislikes.indexOf(req.user.username) === -1){
+            console.log(req.user.username)
+            post.dislikes.push(req.user.username)
         }
-        else if (post.dislikes.indexOf(req.user._id) === -1 && post.likes.indexOf(req.user._id) > -1) {
-            post.likes.splice(post.likes.indexOf(req.user._id), 1)
-            post.dislikes.push(req.user._id)
+        else if (post.dislikes.indexOf(req.user.username) === -1 && post.likes.indexOf(req.user.username) > -1) {
+            post.likes.splice(post.likes.indexOf(req.user.username), 1)
+            post.dislikes.push(req.user.username)
         }
-        else if (post.dislikes.indexOf(req.user._id) > -1 && post.likes.indexOf(req.user._id) === -1){
-            post.dislikes.splice(post.dislikes.indexOf(req.user._id), 1)
+        else if (post.dislikes.indexOf(req.user.username) > -1 && post.likes.indexOf(req.user.username) === -1){
+            post.dislikes.splice(post.dislikes.indexOf(req.user.username), 1)
         }
 
         await post.save();

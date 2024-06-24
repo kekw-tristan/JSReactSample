@@ -11,6 +11,18 @@ const PostDetails = ({ post, comments }) => {
     const { user } = useAuthContext();
 
     let likes = post.likes.length - post.dislikes.length
+    let colorLike
+    let colorDislike
+
+    if(post.likes.indexOf(user.username) === -1)
+        colorLike = "#f1f1f1"
+    else
+        colorLike = "#618264"
+
+    if(post.dislikes.indexOf(user.username) === -1)
+        colorDislike = "#f1f1f1"
+    else
+        colorDislike = "#618264"
 
     const handleUpvote = async () => {
         if (!user) {
@@ -28,6 +40,13 @@ const PostDetails = ({ post, comments }) => {
             const json = await response.json();
             dispatch({ type: 'UPDATE_POST', payload: json });
             likes = post.likes.length - post.dislikes.length
+            console.log(user)
+            if(post.dislikes.indexOf(user.username) === -1)
+                colorDislike = "#f1f1f1"
+            else
+                colorDislike = "#618264"
+
+
 
         } catch (error) {
             console.error('Failed to upvote the post:', error);
@@ -100,9 +119,9 @@ const PostDetails = ({ post, comments }) => {
             <div className="important">{post.text}</div>
             <p>Posted {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })} by @{post.user_username}</p>
             <div className="action-icons">
-                <span className="material-symbols-outlined" onClick={handleUpvote}>arrow_upward</span>
+                <span style={{backgroundColor:colorLike}} className="material-symbols-outlined" onClick={handleUpvote}>arrow_upward</span>
                 <span>{likes}</span>
-                <span className="material-symbols-outlined" onClick={handleDownvote}>arrow_downward</span>
+                <span style={{backgroundColor:colorDislike}} className="material-symbols-outlined" onClick={handleDownvote}>arrow_downward</span>
                 {post.user_username === user.username && (
                     <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
                 )}
