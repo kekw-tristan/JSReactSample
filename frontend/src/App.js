@@ -1,8 +1,9 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useAuthContext } from "./hooks/useAuthContext";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import { useAuthContext } from "./hooks/useAuthContext"
 
 // pages and components
 import Posts from './pages/Posts'
+import Home from './pages/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Navbar from './components/Navbar'
@@ -17,7 +18,11 @@ function App() {
                 <div className="pages">
                     <Routes>
                         <Route
-                            path="/"
+                            path="/home"
+                            element={user ? <Home />: <Navigate to="/login" />}
+                        />
+                        <Route
+                            path="/posts"
                             element={user ? <Posts /> : <Navigate to="/login" />}
                         />
                         <Route

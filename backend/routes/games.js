@@ -1,13 +1,11 @@
 const express = require('express')
-const {
-    getGames,
-    getGame,
-    createGame,
-    deleteGame,
-    updateGame
-} = require('../controllers/gameController')
+const { getGames, getGame, createGame, deleteGame, updateGame, upvoteGame, downvoteGame } = require('../controllers/gameController')
+const requireAuth = require('../middleware/requireAuth')
 
 const router = express.Router()
+
+// require auth for all post routes
+router.use(requireAuth)
 
 // GET all games
 router.get('/', getGames)
@@ -23,5 +21,11 @@ router.delete('/:id', deleteGame)
 
 // UPDATE a game
 router.patch('/:id', updateGame)
+
+// Route für Upvote
+router.patch('/:id/upvote', upvoteGame);
+
+// Route für Downvote
+router.patch('/:id/downvote', downvoteGame);
 
 module.exports = router

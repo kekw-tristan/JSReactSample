@@ -22,7 +22,16 @@ const gameSchema = new Schema({
     genre: {
         type: String,
         required: true
-    }//,
+    },
+    likes: {
+        type: [String],
+        required: false
+    },
+    dislikes: {
+        type: [String],
+        required: false
+    }
+    //,
     // imagePath: {
     //    required: true
     // }

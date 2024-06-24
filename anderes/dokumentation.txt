@@ -56,4 +56,6 @@
 
 20.06.2024 Lara, Tristan: externe APIs besprochen
 
-21.06.2024 Lara: Kommentare gefixed (werden direkt gelöscht), Votes gefixed (werden ebenfalls direkt gelöscht), css
+22.06.2024 Lara: Kommentare gefixed (werden direkt gelöscht), Votes gefixed (werden ebenfalls direkt gelöscht), css
+
+24.06.2024 Tristan, Lara: Krisenbesprechung
