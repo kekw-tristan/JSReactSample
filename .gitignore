@@ -1,6 +1,7 @@
 # Node modules
 backend/node_modules/
+node_modules
 # dotenv
 .env
-#databse
+#datbase
 database
