@@ -46,8 +46,6 @@ const PostDetails = ({ post, comments }) => {
             else
                 colorDislike = "#618264"
 
-
-
         } catch (error) {
             console.error('Failed to upvote the post:', error);
         }

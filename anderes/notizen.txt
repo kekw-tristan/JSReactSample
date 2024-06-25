@@ -17,7 +17,7 @@ npm install validator (backend)
 npm install jsonwebtoken (backend)
 
 to do:
-- gamesseite
-- kennzeichnen ob schon gevotet wurde
 - apis extern
 - apis von anderen
+- statistiken api
+- comments.yml und games.yml nochmal abchecken, wegen response und ob alles funktioniert

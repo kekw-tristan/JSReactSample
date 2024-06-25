@@ -2,10 +2,22 @@ import { useGamesContext } from '../hooks/useGamesContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 
 const GameDetails = ({ game }) => {
-    const { user } = useAuthContext()
     const { dispatch } = useGamesContext()
+    const { user } = useAuthContext()
 
-   let likes = game.likes.length - game.dislikes.length
+    let likes = game.likes.length - game.dislikes.length
+    let colorLike
+    let colorDislike
+
+    if(game.likes.indexOf(user.username) === -1)
+        colorLike = "#f1f1f1"
+    else
+        colorLike = "#618264"
+
+    if(game.dislikes.indexOf(user.username) === -1)
+        colorDislike = "#f1f1f1"
+    else
+        colorDislike = "#618264"
 
     const handleUpvote = async () => {
         if (!user) {
@@ -18,16 +30,21 @@ const GameDetails = ({ game }) => {
                 headers: {
                     'Authorization': `Bearer ${user.token}`
                 }
-            })
+            });
 
-            const json = await response.json()
-            dispatch({ type: 'UPDATE_GAME', payload: json })
+            const json = await response.json();
+            dispatch({ type: 'UPDATE_GAME', payload: json });
             likes = game.likes.length - game.dislikes.length
+            console.log(user)
+            if(game.dislikes.indexOf(user.username) === -1)
+                colorDislike = "#f1f1f1"
+            else
+                colorDislike = "#618264"
 
         } catch (error) {
-            console.error('Failed to upvote the game:', error)
+            console.error('Failed to upvote the game:', error);
         }
-    }
+    };
 
     const handleDownvote = async () => {
         if (!user) {
@@ -54,15 +71,17 @@ const GameDetails = ({ game }) => {
     return (
         <div className="game-details">
             <h4>{game.title}</h4>
-            <div className="important">Beschreibung: {game.description}</div>
-            <div className="important">Entwickler: {game.developer}</div>
-            <div className="important">Genre: {game.genre}</div>
-            <div className="important">Erschienen am: {game.releaseDate}</div>
+            <div className="important">{game.description}</div>
+            <div className="important">{game.developer}</div>
+            <div className="important">{game.genre}</div>
+            <div className="important">{game.releaseDate}</div>
             <div className="action-icons">
-                <span className="material-symbols-outlined" onClick={handleUpvote}>arrow_upward</span>
+                <span style={{backgroundColor:colorLike}} className="material-symbols-outlined" onClick={handleUpvote}>arrow_upward</span>
                 <span>{likes}</span>
-                <span className="material-symbols-outlined" onClick={handleDownvote}>arrow_downward</span>
+                <span style={{backgroundColor:colorDislike}} className="material-symbols-outlined" onClick={handleDownvote}>arrow_downward</span>
             </div>
-        </div>)}
+        </div>
+    )
+}
 
-export default GameDetails;
+export default GameDetails

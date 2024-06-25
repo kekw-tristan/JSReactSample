@@ -114,16 +114,16 @@ const upvoteGame = async (req, res) => {
             return res.status(404).json({ error: 'Game not found' });
         }
 
-        if (game.likes.indexOf(req.user._id) === -1 && game.dislikes.indexOf(req.user._id) === -1){
-            console.log(req.user._id)
-            game.likes.push(req.user._id)
+        if (game.likes.indexOf(req.user.username) === -1 && game.dislikes.indexOf(req.user.username) === -1){
+            console.log(req.user.username)
+            game.likes.push(req.user.username)
         }
-        else if (game.likes.indexOf(req.user._id) === -1 && game.dislikes.indexOf(req.user._id) > -1) {
-            game.dislikes.splice(game.dislikes.indexOf(req.user._id), 1)
-            game.likes.push(req.user._id)
+        else if (game.likes.indexOf(req.user.username) === -1 && game.dislikes.indexOf(req.user.username) > -1) {
+            game.dislikes.splice(game.dislikes.indexOf(req.user.username), 1)
+            game.likes.push(req.user.username)
         }
-        else if (game.likes.indexOf(req.user._id) > -1 && game.dislikes.indexOf(req.user._id) === -1){
-            game.likes.splice(game.likes.indexOf(req.user._id), 1)
+        else if (game.likes.indexOf(req.user.username) > -1 && game.dislikes.indexOf(req.user.username) === -1){
+            game.likes.splice(game.likes.indexOf(req.user.username), 1)
         }
 
         await game.save();
@@ -149,14 +149,14 @@ const downvoteGame = async (req, res) => {
             return res.status(404).json({error: 'Game not found'});
         }
 
-        if (game.likes.indexOf(req.user._id) === -1 && game.dislikes.indexOf(req.user._id) === -1) {
-            console.log(req.user._id)
-            game.dislikes.push(req.user._id)
-        } else if (game.dislikes.indexOf(req.user._id) === -1 && game.likes.indexOf(req.user._id) > -1) {
-            game.likes.splice(game.likes.indexOf(req.user._id), 1)
-            game.dislikes.push(req.user._id)
-        } else if (game.dislikes.indexOf(req.user._id) > -1 && game.likes.indexOf(req.user._id) === -1) {
-            game.dislikes.splice(game.dislikes.indexOf(req.user._id), 1)
+        if (game.likes.indexOf(req.user.username) === -1 && game.dislikes.indexOf(req.user.username) === -1) {
+            console.log(req.user.username)
+            game.dislikes.push(req.user.username)
+        } else if (game.dislikes.indexOf(req.user.username) === -1 && game.likes.indexOf(req.user.username) > -1) {
+            game.likes.splice(game.likes.indexOf(req.user.username), 1)
+            game.dislikes.push(req.user.username)
+        } else if (game.dislikes.indexOf(req.user.username) > -1 && game.likes.indexOf(req.user.username) === -1) {
+            game.dislikes.splice(game.dislikes.indexOf(req.user.username), 1)
         }
 
         await game.save();

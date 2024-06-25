@@ -1,0 +1,168 @@
+openapi: 3.0.0
+info:
+  title: Comments API
+  version: 1.0.0
+  description: API for managing comments in the application
+
+servers:
+  - url: http://localhost:4000/api
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Comment:
+      type: object
+      required:
+        - text
+        - post_id
+        - user_id
+      properties:
+        _id:
+          type: string
+          description: The comment ID
+        text:
+          type: string
+          description: The text of the comment
+        post_id:
+          type: string
+          description: The ID of the associated post
+        user_id:
+          type: string
+          description: The ID of the user who created the comment
+        user_username:
+          type: string
+          description: The username of the user who created the comment
+        createdAt:
+          type: string
+          format: date-time
+          description: The date and time when the comment was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: The date and time when the comment was last updated
+
+security:
+  - BearerAuth: []
+
+paths:
+  /comments:
+    get:
+      summary: Get all comments
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: A list of comments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+    post:
+      summary: Create a new comment
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+                  description: The text of the comment
+                post_id:
+                  type: string
+                  description: The ID of the associated post
+      responses:
+        '200':
+          description: The created comment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+        '400':
+          description: Error message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+    delete:
+      summary: Delete all comments
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: All comments have been deleted
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+
+  /comments/{id}:
+    get:
+      summary: Get a single comment
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the comment to retrieve
+      responses:
+        '200':
+          description: The requested comment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+        '404':
+          description: Comment not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+    delete:
+      summary: Delete a comment
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the comment to delete
+      responses:
+        '200':
+          description: The deleted comment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+        '400':
+          description: Error message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string

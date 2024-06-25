@@ -1,0 +1,307 @@
+openapi: 3.0.0
+info:
+  title: Games API
+  version: 1.0.0
+  description: API for managing games in the application
+
+servers:
+  - url: http://localhost:4000/api
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Game:
+      type: object
+      required:
+        - title
+        - description
+        - releaseDate
+        - developer
+        - genre
+      properties:
+        _id:
+          type: string
+          description: The game ID
+        title:
+          type: string
+          description: The title of the game
+        description:
+          type: string
+          description: The description of the game
+        releaseDate:
+          type: string
+          format: date
+          description: The release date of the game
+        developer:
+          type: string
+          description: The developer of the game
+        genre:
+          type: string
+          description: The genre of the game
+        likes:
+          type: array
+          items:
+            type: string
+          description: List of usernames who liked the game
+        dislikes:
+          type: array
+          items:
+            type: string
+          description: List of usernames who disliked the game
+        createdAt:
+          type: string
+          format: date-time
+          description: The date and time when the game was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: The date and time when the game was last updated
+
+security:
+  - BearerAuth: []
+
+paths:
+  /games:
+    get:
+      summary: Get all games
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: A list of games
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Game'
+    post:
+      summary: Create a new game
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: The title of the game
+                description:
+                  type: string
+                  description: The description of the game
+                releaseDate:
+                  type: string
+                  format: date
+                  description: The release date of the game
+                developer:
+                  type: string
+                  description: The developer of the game
+                genre:
+                  type: string
+                  description: The genre of the game
+      responses:
+        '200':
+          description: The created game
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '400':
+          description: Error message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /games/{id}:
+    get:
+      summary: Get a single game
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the game to retrieve
+      responses:
+        '200':
+          description: The requested game
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '404':
+          description: Game not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+    delete:
+      summary: Delete a game
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the game to delete
+      responses:
+        '200':
+          description: The deleted game
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '400':
+          description: Error message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+    patch:
+      summary: Update a game
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the game to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: The title of the game
+                description:
+                  type: string
+                  description: The description of the game
+                releaseDate:
+                  type: string
+                  format: date
+                  description: The release date of the game
+                developer:
+                  type: string
+                  description: The developer of the game
+                genre:
+                  type: string
+                  description: The genre of the game
+      responses:
+        '200':
+          description: The updated game
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '400':
+          description: Error message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /games/{id}/upvote:
+    patch:
+      summary: Upvote a game
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the game to upvote
+      responses:
+        '200':
+          description: The updated game with the upvote
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '400':
+          description: Error message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '404':
+          description: Game not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /games/{id}/downvote:
+    patch:
+      summary: Downvote a game
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the game to downvote
+      responses:
+        '200':
+          description: The updated game with the downvote
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '400':
+          description: Error message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '404':
+          description: Game not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
