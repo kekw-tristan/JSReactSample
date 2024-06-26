@@ -11,14 +11,14 @@ const getUserStats = async (req, res) => {
         let userStats = [];
 
         for (const user of users) {
-            const userId = user._id;
+            const user_id = user._id;
             const username = user.username;
 
             // Number of posts
-            const postCount = await Post.countDocuments({ user_id: userId });
+            const postCount = await Post.countDocuments({ user_id: user_id });
 
             // Number of comments
-            const commentCount = await Comment.countDocuments({ user_id: userId });
+            const commentCount = await Comment.countDocuments({ user_id: user_id });
 
             // Number of likes on posts
             const likedPostsCount = await Post.countDocuments({ likes: username });
@@ -32,15 +32,7 @@ const getUserStats = async (req, res) => {
             // Number of disliked games
             const dislikedGamesCount = await Game.countDocuments({ dislikes: username });
 
-            userStats.push({
-                userId,
-                username,
-                postCount,
-                commentCount,
-                likedPostsCount,
-                dislikedPostsCount,
-                likedGamesCount,
-                dislikedGamesCount
+            userStats.push({ user_id, username, postCount, commentCount, likedPostsCount, dislikedPostsCount, likedGamesCount, dislikedGamesCount
             });
         }
 

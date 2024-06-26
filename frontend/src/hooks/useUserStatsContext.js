@@ -5,7 +5,7 @@ export const useUserStatsContext = () => {
     const context = useContext(UserStatsContext)
 
     if (!context) {
-        throw Error('useUserStatsContext must be used inside a UserStatsContextProvider')
+        throw Error('useUserStatsContext must be used inside a UserSContextProvider')
     }
 
     return context

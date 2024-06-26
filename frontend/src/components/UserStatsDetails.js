@@ -1,21 +1,17 @@
-import { useUserStatsContext } from '../hooks/useUserStatsContext'
-import { useAuthContext } from '../hooks/useAuthContext'
-
 const UserStatsDetails = ({ userStat }) => {
-    const { dispatch } = useUserStatsContext()
-    const { user } = useAuthContext()
-
     return (
+
         <div className="userStats-details">
-            <h4>{userStat.user_id}</h4>
-            <div className="important">{userStat.likesOnPosts}</div>
-            <div className="important">{userStat.dislikesOnPosts}</div>
-            <div className="important">{userStat.commentsWritten}</div>
-            <div className="important">{userStat.postsWritten}</div>
-            <div className="important">{userStat.gamesLiked}</div>
-            <div className="important">{userStat.gamesDisliked}</div>
+            <h4>User: {userStat.username}</h4>
+            <div className="important">Aktivster User: {userStat.mostActiveUser}</div>
+            <div className="important">Likes on Posts: {userStat.likedPostsCount}</div>
+            <div className="important">Dislikes on Posts: {userStat.dislikedPostsCount}</div>
+            <div className="important">Comments Written: {userStat.commentCount}</div>
+            <div className="important">Posts Written: {userStat.postCount}</div>
+            <div className="important">Games Liked: {userStat.likedGamesCount}</div>
+            <div className="important">Games Disliked: {userStat.dislikedGamesCount}</div>
         </div>
     )
 }
 
-export default UserStatsDetails
+export default UserStatsDetails;
