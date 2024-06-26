@@ -3,14 +3,13 @@ import { useLogin } from "../hooks/useLogin";
 
 const Login = () => {
     const [username, setUsername] = useState('')
-    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const {login, error, isLoading} = useLogin()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        await login(username, email, password)
+        await login(username, password)
     }
 
     return (
@@ -22,12 +21,6 @@ const Login = () => {
                 type="text"
                 onChange={(e) => setUsername(e.target.value)}
                 value={username}
-            />
-            <label>Email:</label>
-            <input
-                type="email"
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
             />
             <label>Password:</label>
             <input
