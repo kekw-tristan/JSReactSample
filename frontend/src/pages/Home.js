@@ -6,7 +6,7 @@ import { useGamesContext } from "../hooks/useGamesContext"
 import GameDetails from "../components/GameDetails"
 
 const Games = () => {
-    const { games, dispatch: gamesDispatch } = useGamesContext();
+    const { games, dispatch: gamesDispatch } = useGamesContext()
     const { user } = useAuthContext()
 
     useEffect(() => {

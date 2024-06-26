@@ -28,8 +28,7 @@ const getComment = async (req, res) => {
 
 // create a new comment
 const createComment = async (req, res) => {
-
-    const text = req.body.text
+    const { text } = req.body
     const post_id = JSON.parse(req.body.post_id).post_id
 
 
@@ -82,10 +81,4 @@ const deleteComment = async (req, res) => {
     res.status(200).json(comment)
 }
 
-const deleteComments = async (req, res) => {
-    const comments = await Comment.findOneAndDelete({})
-
-    res.status(200).json(comments)
-}
-
-module.exports = { getComments, getComment, createComment, deleteComment, deleteComments }
+module.exports = { getComments, getComment, createComment, deleteComment }

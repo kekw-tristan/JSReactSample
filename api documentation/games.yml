@@ -179,56 +179,6 @@ paths:
                 properties:
                   error:
                     type: string
-    patch:
-      summary: Update a game
-      security:
-        - BearerAuth: []
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-          description: The ID of the game to update
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                title:
-                  type: string
-                  description: The title of the game
-                description:
-                  type: string
-                  description: The description of the game
-                releaseDate:
-                  type: string
-                  format: date
-                  description: The release date of the game
-                developer:
-                  type: string
-                  description: The developer of the game
-                genre:
-                  type: string
-                  description: The genre of the game
-      responses:
-        '200':
-          description: The updated game
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Game'
-        '400':
-          description: Error message
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
 
   /games/{id}/upvote:
     patch:

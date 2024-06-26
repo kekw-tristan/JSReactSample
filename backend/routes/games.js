@@ -1,5 +1,5 @@
 const express = require('express')
-const { getGames, getGame, createGame, deleteGame, updateGame, upvoteGame, downvoteGame } = require('../controllers/gameController')
+const { getGames, getGame, createGame, deleteGame, upvoteGame, downvoteGame } = require('../controllers/gameController')
 const requireAuth = require('../middleware/requireAuth')
 
 const router = express.Router()
@@ -18,9 +18,6 @@ router.post('/', createGame)
 
 // DELETE a game
 router.delete('/:id', deleteGame)
-
-// UPDATE a game
-router.patch('/:id', updateGame)
 
 // Route für Upvote
 router.patch('/:id/upvote', upvoteGame);

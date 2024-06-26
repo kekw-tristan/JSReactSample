@@ -81,25 +81,6 @@ const deleteGame = async (req, res) => {
     res.status(200).json(game)
 }
 
-// update a game
-const updateGame = async (req, res) => {
-    const { id } = req.params
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(400).json({error: 'No such Game'})
-    }
-
-    const game = await Game.findOneAndUpdate({_id: id}, {
-        ...req.body
-    })
-
-    if (!game) {
-        return res.status(400).json({error: 'No such Game'})
-    }
-
-    res.status(200).json(game)
-}
-
 // upvote a game
 const upvoteGame = async (req, res) => {
     const { id } = req.params;
@@ -167,4 +148,4 @@ const downvoteGame = async (req, res) => {
     }
 }
 
-module.exports = { getGames, getGame, createGame, deleteGame, updateGame, upvoteGame, downvoteGame }
+module.exports = { getGames, getGame, createGame, deleteGame, upvoteGame, downvoteGame }

@@ -97,19 +97,6 @@ paths:
                 properties:
                   error:
                     type: string
-    delete:
-      summary: Delete all comments
-      security:
-        - BearerAuth: []
-      responses:
-        '200':
-          description: All comments have been deleted
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Comment'
 
   /comments/{id}:
     get:

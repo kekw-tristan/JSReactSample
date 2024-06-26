@@ -6,6 +6,7 @@ import { PostsContextProvider } from "./context/PostContext";
 import { AuthContextProvider } from "./context/AuthContext";
 import { CommentsContextProvider} from "./context/CommentContext";
 import { GameContextProvider } from "./context/GamesContext";
+import {UserStatsContextProvider} from "./context/UserStatsContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,7 +15,9 @@ root.render(
                 <GameContextProvider>
                         <PostsContextProvider>
                                 <CommentsContextProvider>
-                                    <App />
+                                    <UserStatsContextProvider>
+                                        <App />
+                                    </UserStatsContextProvider>
                                 </CommentsContextProvider>
                         </PostsContextProvider>
                 </GameContextProvider>
