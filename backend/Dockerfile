@@ -17,9 +17,9 @@ RUN npm install swagger-jsdoc swagger-ui-express
 
 COPY . .
 
-ENV PORT=4000
+ENV PORT=10015
 ENV SECRET=webaufbau
 
-EXPOSE 4000
+EXPOSE 10015
 
 CMD [ "npm", "start" ]
