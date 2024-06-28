@@ -71,10 +71,10 @@ const GameDetails = ({ game }) => {
     return (
         <div className="game-details">
             <h4>{game.title}</h4>
-            <div className="important">{game.description}</div>
-            <div className="important">{game.developer}</div>
-            <div className="important">{game.genre}</div>
-            <div className="important">{game.releaseDate}</div>
+            <div className="important">Beschreibung: {game.description}</div>
+            <div className="important">Entwickler: {game.developer}</div>
+            <div className="important">Genre: {game.genre}</div>
+            <div className="important">Herausgekommen am: {game.releaseDate}</div>
             <div className="action-icons">
                 <span style={{backgroundColor:colorLike}} className="material-symbols-outlined" onClick={handleUpvote}>arrow_upward</span>
                 <span>{likes}</span>

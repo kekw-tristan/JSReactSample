@@ -31,7 +31,7 @@ const Games = () => {
     return (
         <div className="games">
                 {games && games.map(game => (
-                    <GameDetails game={game}></GameDetails>
+                    <GameDetails key={game._id} game={game}></GameDetails>
                 ))}
         </div>
     );

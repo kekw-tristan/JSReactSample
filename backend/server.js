@@ -6,7 +6,7 @@ const postRoutes = require('./routes/posts')
 const userRoutes = require('./routes/user')
 const gameRoutes = require('./routes/games')
 const commentRoutes = require('./routes/comments')
-const userStatsRoutes = require('./routes/userStats');
+const userStatsRoutes = require('./routes/userStats')
 
 // express app
 const app = express()

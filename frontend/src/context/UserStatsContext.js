@@ -6,9 +6,9 @@ export const userStatsReducer = (state, action) => {
     switch (action.type) {
         case 'SET_USERSTATS':
             return {
-                userStats: action.payload
+                userStats: action.payload.userStats,
+                mostActiveUser: action.payload.mostActiveUser,
             };
-
         default:
             return state;
     }
@@ -16,7 +16,8 @@ export const userStatsReducer = (state, action) => {
 
 export const UserStatsContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(userStatsReducer, {
-        userStats: []
+        userStats: [],
+        mostActiveUser: null,
     });
 
     return (

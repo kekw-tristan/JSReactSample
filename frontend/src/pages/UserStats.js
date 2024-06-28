@@ -4,7 +4,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import UserStatsDetails from "../components/UserStatsDetails";
 
 const UserStats = () => {
-    const { userStats, dispatch: userStatsDispatch } = useUserStatsContext();
+    const { userStats, mostActiveUser, dispatch: userStatsDispatch } = useUserStatsContext();
     const { user } = useAuthContext();
 
     useEffect(() => {
@@ -25,14 +25,17 @@ const UserStats = () => {
                 console.log('API response:', json);
 
                 if (json && Array.isArray(json.userStats)) {
-                    userStatsDispatch({ type: 'SET_USERSTATS', payload: json.userStats });
+                    userStatsDispatch({
+                        type: 'SET_USERSTATS',
+                        payload: { userStats: json.userStats, mostActiveUser: json.mostActiveUser }
+                    });
                 } else {
                     console.error('API response does not contain userStats array:', json);
-                    userStatsDispatch({ type: 'SET_USERSTATS', payload: [] }); // Setzen Sie einen leeren Array
+                    userStatsDispatch({ type: 'SET_USERSTATS', payload: { userStats: [], mostActiveUser: null } });
                 }
             } catch (error) {
                 console.error('Error fetching user stats:', error);
-                userStatsDispatch({ type: 'SET_USERSTATS', payload: [] }); // Setzen Sie einen leeren Array im Fehlerfall
+                userStatsDispatch({ type: 'SET_USERSTATS', payload: { userStats: [], mostActiveUser: null } });
             }
         };
 
@@ -45,9 +48,15 @@ const UserStats = () => {
 
     return (
         <div className="userStats">
+            {mostActiveUser && (
+                <div className="most-active-user">
+                    <h3>Most Active User</h3>
+                    <UserStatsDetails userStat={mostActiveUser} isMostActive={true} />
+                </div>
+            )}
             {Array.isArray(userStats) && userStats.length > 0 ? (
                 userStats.map(userStat => (
-                    <UserStatsDetails key={userStat.user_id} userStat={userStat} />
+                    <UserStatsDetails key={userStat.user_id} userStat={userStat} isMostActive={false} />
                 ))
             ) : (
                 <p>No user stats available</p>
@@ -56,4 +65,4 @@ const UserStats = () => {
     );
 }
 
-export default UserStats;
+export default UserStats

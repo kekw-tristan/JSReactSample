@@ -22,7 +22,6 @@ const Navbar = () => {
                         <Link to="/home">Home</Link>
                         <Link to="/posts">Posts</Link>
                         <Link to="/statistics">Statistics</Link>
-                        <Link to="/documentation">Dokumentation</Link>
                     </div>
 
                     {user && (

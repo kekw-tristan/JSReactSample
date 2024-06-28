@@ -1,9 +1,7 @@
-const UserStatsDetails = ({ userStat }) => {
+const UserStatsDetails = ({ userStat, isMostActive  }) => {
     return (
-
-        <div className="userStats-details">
+        <div className={`userStats-details ${isMostActive ? 'most-active' : ''}`}>
             <h4>User: {userStat.username}</h4>
-            <div className="important">Aktivster User: {userStat.mostActiveUser}</div>
             <div className="important">Likes on Posts: {userStat.likedPostsCount}</div>
             <div className="important">Dislikes on Posts: {userStat.dislikedPostsCount}</div>
             <div className="important">Comments Written: {userStat.commentCount}</div>

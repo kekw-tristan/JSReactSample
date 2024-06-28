@@ -208,7 +208,7 @@ form.signup, form.login {
 /*games*/
 .game-details {
   background: #fff;
-  border-radius: 4px;
+  border-radius: 8px;
   margin: 20px auto;
   padding: 20px;
   position: relative;
@@ -227,12 +227,12 @@ form.signup, form.login {
 }
 .userStats-details {
   background: #fff;
-  border-radius: 4px;
-  margin: 20px auto;
+  border-radius: 8px;
+  margin: 20px;
   padding: 20px;
-  position: relative;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
   height: auto;
+  width: 300px;
 }
 .userStats-details h4 {
   margin: 0 0 10px 0;
@@ -243,4 +243,19 @@ form.signup, form.login {
   margin: 0;
   font-size: small;
   color: #555;
+}
+
+footer {
+  background-color: #618264;
+  height: 80px;
+  width: 100%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+footer a {
+  color: #f1f1f1;
+  font-family: 'Press Start 2P', cursive;
+  text-decoration: none;
+  padding: 33px;
 }

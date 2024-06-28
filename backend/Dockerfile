@@ -14,6 +14,7 @@ RUN npm install bcrypt
 RUN npm install validator
 RUN npm install jsonwebtoken
 RUN npm install swagger-jsdoc swagger-ui-express
+RUN npm install axios
 
 COPY . .
 
