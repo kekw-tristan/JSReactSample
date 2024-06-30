@@ -32,9 +32,11 @@ services:
     restart:
       always
     ports:
-      - "4000:4000"
+      - "10011:10011"
+      - "10012:10012"
+      - "10013:10013"
     environment:
-      - MONGO_URI=mongodb://root:example@mongo:27017/
+      - MONGO_URI=mongodb://root:example@mongo:10015/
     depends_on:
       - mongo
 
